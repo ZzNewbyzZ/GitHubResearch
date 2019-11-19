@@ -38,50 +38,6 @@ def parse_args():
     return parser.parse_args()
 
 
-
-def write_csv(session, url, file_path):
-    """ Get information from a url and write it to the specified file.
-
-    Params
-    ------
-    session : requests.session
-        An active, parameterized session.
-
-    url : str
-        The string description of the URL from which we will gather information.
-
-    file_path : str
-        The string description of the path to which we will write the CSV file.
-
-    Returns
-    -------
-    None
-    """
-    pd_prs = pd.read_json(session.get(url).text)
-    frames = []
-    rows = []
-
-    # Not the best way to use pandas, but since the information was split across
-    #  multiple pages (/pulls/ and /pulls/comments/) I had a hard time joining
-    #  the data into a single, properly formatted dataframe.  I tried a lot
-    #  of other solutions, but settled on this one after a few hours of failure.
-    for idx, row in pd_prs.iterrows():
-        # Grab the comment data as a datframe
-        comments = pd.read_json(session.get(row['comments_url']).text)
-        # Attempt to trim dataframe down to what we need (only id and body)
-        #  If there are no comments, then there is nothing to grab.
-        try:
-            comments = comments[['id', 'body']]
-            rows.append(row['number'])
-        except:
-            continue
-        frames.append(comments)
-
-    # Concatenate the comment dataframes using PR number as primary index
-    out = pd.concat(frames, keys=rows, names=['pr_num','comment_num'])
-    out.to_csv(file_path)
-
-
 def collect_stats(session, input, params):
     data = []
     for repo in input:
@@ -143,8 +99,8 @@ def main(n_results, popular_path, other_path, others_out, out):
         popular = f.read().split('\n')
     # Collect statistics for the popular repositories
 
-    #popular_stats = collect_stats(session, popular, params)
-    #popular_stats.to_csv(out.replace('.csv','_popular.csv'))
+    popular_stats = collect_stats(session, popular, params)
+    popular_stats.to_csv(out.replace('.csv','_popular.csv'))
 
     # Collect statistics for 'other' repositories
     other_stats = collect_random_stats(session, n_results, params)
