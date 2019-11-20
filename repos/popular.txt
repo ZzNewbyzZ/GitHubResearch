@@ -24,7 +24,7 @@ microsoft/TypeScript
 GoogleChrome/puppeteer
 angular/angular
 ant-design/ant-design
-web pack/webpack
+webpack/webpack
 nvbn/thefuck
 hakimel/reveal.js
 socketio/socket.io
