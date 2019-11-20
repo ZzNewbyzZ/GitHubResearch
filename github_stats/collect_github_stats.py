@@ -11,13 +11,13 @@ def parse_args():
     parser.add_argument('--num_results',
                         '-n',
                         dest='n_results',
-                        default=50,
+                        default=100,
                         help="The number of random repositories to scrape.")
 
     parser.add_argument('--popular-repos',
                         '-r',
                         dest='popular_path',
-                        default='repos.txt',
+                        default='popular.txt',
                         help='The path of the file containing information about popular repositories.')
 
     parser.add_argument('--other-repos',

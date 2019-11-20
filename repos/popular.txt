@@ -24,7 +24,7 @@ microsoft/TypeScript
 GoogleChrome/puppeteer
 angular/angular
 ant-design/ant-design
-web pack/webpack
+webpack/webpack
 nvbn/thefuck
 hakimel/reveal.js
 socketio/socket.io
@@ -48,3 +48,22 @@ rust-lang/rust
 gatsbyjs/gatsby
 opencv/opencv
 gohugoio/hugo
+ardanlabs/gotraining
+ether/etherpad-lite
+loopj/jquery-tokeninput
+google/google-ctf
+AlexLittlejohn/ALCameraViewController
+bastillion-io/Bastillion
+opencv/opencv
+ethereum/go-ethereum
+mezod/awesome-indie
+noffle/art-of-readme
+awslabs/aws-shell
+therecipe/qt
+go-delve/delve
+joewalnes/websocketd
+CodeboxIDE/codebox
+composer/composer
+amsul/pickadate.js
+quilljs/quill
+pbreault/adb-idea
