@@ -12,6 +12,7 @@ def parse_args():
                         '-n',
                         dest='n_results',
                         default=50,
+                        type=int,
                         help="The number of random repositories to scrape.")
 
     parser.add_argument('--popular-repos',
@@ -44,7 +45,10 @@ def collect_stats(session, input, params):
         url = f'https://api.github.com/repos/{repo}'
         print(url)
         text = json.loads(session.get(url).text)
-        data.append(get_params(text,params))
+        try:
+            data.append(get_params(text,params))
+        except ValueError:
+            pass
 
     metadata_df = pd.DataFrame(columns=params, data=data)
     return(metadata_df)
@@ -99,8 +103,8 @@ def main(n_results, popular_path, other_path, others_out, out):
         popular = f.read().split('\n')
     # Collect statistics for the popular repositories
 
-    popular_stats = collect_stats(session, popular, params)
-    popular_stats.to_csv(out.replace('.csv','_popular.csv'))
+    #popular_stats = collect_stats(session, popular, params)
+    #popular_stats.to_csv(out.replace('.csv','_popular.csv'))
 
     # Collect statistics for 'other' repositories
     other_stats = collect_random_stats(session, n_results, params)
